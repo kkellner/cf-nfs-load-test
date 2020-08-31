@@ -1,0 +1,62 @@
+{"properties": [
+  {
+    "name": "read.filename",
+    "type": "java.lang.String",
+    "description": "A description for 'read.filename'"
+  },
+  {
+    "name": "logOutputIntervalSeconds",
+    "type": "java.lang.String",
+    "description": "A description for 'logOutputIntervalSeconds'"
+  },
+  {
+    "name": "startupDelay",
+    "type": "java.lang.String",
+    "description": "A description for 'startupDelay'"
+  },
+  {
+    "name": "read.threads",
+    "type": "java.lang.String",
+    "description": "A description for 'read.threads'"
+  },
+  {
+    "name": "read.filesize",
+    "type": "java.lang.String",
+    "description": "A description for 'read.filesize'"
+  },
+  {
+    "name": "read.chunkSize",
+    "type": "java.lang.String",
+    "description": "A description for 'read.chunkSize'"
+  },
+  {
+    "name": "read.durationSeconds",
+    "type": "java.lang.String",
+    "description": "A description for 'read.durationSeconds'"
+  },
+  {
+    "name": "write.threads",
+    "type": "java.lang.String",
+    "description": "A description for 'write.threads'"
+  },
+  {
+    "name": "write.filename",
+    "type": "java.lang.String",
+    "description": "A description for 'write.filename'"
+  },
+  {
+    "name": "write.filesize",
+    "type": "java.lang.String",
+    "description": "A description for 'write.filesize'"
+  },
+  {
+    "name": "write.chunkSize",
+    "type": "java.lang.String",
+    "description": "A description for 'write.chunkSize'"
+  },
+  {
+    "name": "write.durationSeconds",
+    "type": "java.lang.String",
+    "description": "A description for 'write.durationSeconds'"
+  }
+]}

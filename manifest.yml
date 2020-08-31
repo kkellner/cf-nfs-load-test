@@ -1,0 +1,10 @@
+---
+applications:
+- name: nfstest
+  path: build/libs/cf-nfs-load-test-0.0.1-SNAPSHOT.jar
+  #routes:
+  buildpack: java_buildpack_offline
+  #stack: cflinuxfs3
+  instances: 1
+  services:
+  - test-nfs
