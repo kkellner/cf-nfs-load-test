@@ -18,7 +18,7 @@ cf create-service nfs Existing test-nfs -c '{"share": "172.20.0.26/mnt/pool1/vol
 # Download and install app
 
 ```
-curl https://github.com/kkellner/cf-nfs-load-test/releases/download/v1.0.0/cf-nfs-load-test-0.0.1-SNAPSHOT.jar -o cf-nfs-load-test-0.0.1-SNAPSHOT.jar
+curl https://github.com/kkellner/cf-nfs-load-test/releases/download/v0.0.2/cf-nfs-load-test-0.0.2-SNAPSHOT.jar -o cf-nfs-load-test-0.0.1-SNAPSHOT.jar
 cf push nfstest --no-start -p cf-nfs-load-test-0.0.1-SNAPSHOT.jar
 cf bind-service nfstest test-nfs
 cf start nfstest
