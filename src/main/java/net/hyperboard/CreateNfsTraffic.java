@@ -4,10 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -163,8 +159,8 @@ public class CreateNfsTraffic {
 			// Create a file to use for the read test
 			dataFile.delete();
 			writeData(dataFile, readFileSize, 8 * 1024);
-
 			readDataForDuration(dataFile, readFileSize, readChunkSize, readDurationSeconds * 1000);
+			dataFile.delete();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -229,6 +225,8 @@ public class CreateNfsTraffic {
 
 		} while (System.currentTimeMillis() - writeStartTime < loopDurationMilliseconds);
 
+		dataFile.delete();
+		
 		if (loopDurationMilliseconds > 0) {
 			logger.info("write data complete after {} seconds", (System.currentTimeMillis() - writeStartTime) / 1000);
 		}
@@ -315,55 +313,6 @@ public class CreateNfsTraffic {
 
 	}
 	
-	/**
-	 * Read bytes
-	 * 
-	 * @param dataFile
-	 * @param fileSize
-	 * @param chuckSize
-	 * @return Number of bytes read
-	 * @throws IOException
-	 */
-	public long readDataChannel(File dataFile, long fileSize, int chuckSize) throws IOException {
-
-		FileInputStream in = null;
-		long totalBytesRead = 0;
-
-		//byte[] data = new byte[chuckSize];
-		ByteBuffer buf = ByteBuffer.allocate(chuckSize);
-		
-
-		try {
-
-			// We purposely don't use a bufferedOutputStream because we're trying
-			// to generate a lot of network traffic to test NFS load on NSX
-			in = new FileInputStream(dataFile);
-			FileChannel inChannel = in.getChannel();
-			
-			while (totalBytesRead < fileSize) {
-				int len = (int) Math.min(chuckSize, fileSize - totalBytesRead);
-				//int bytesRead = in.read(data, 0, len);
-				int bytesRead = inChannel.read(buf);
-				buf.clear();
-				if (bytesRead < 0) {
-					logger.warn("Read past end of stream");
-					break;
-				}
-//				if (bytesRead != len) {
-//					logger.warn("Read returned {} bytes when {} bytes was requested.", bytesRead, len);
-//				}
-				totalBytesRead += bytesRead;
-				if (shutdown) {
-					break;
-				}
-			}
-
-		} finally {
-			IOUtils.closeQuietly(in);
-		}
-		return totalBytesRead;
-
-	}
 
 	/**
 	 * Read bytes
@@ -410,23 +359,5 @@ public class CreateNfsTraffic {
 
 	}
 
-	public void readDataTestX() throws IOException {
-		File testFile = new File(nfsDirectory, testReadFileBaseName);
-		String mode = "rw";
-		byte[] dataBuffer = new byte[readChunkSize];
-
-		RandomAccessFile randAcessFile = null;
-		try {
-			randAcessFile = new RandomAccessFile(testFile, mode);
-
-			while (true) {
-				randAcessFile.seek(0);
-				int bytesRead = randAcessFile.read(dataBuffer);
-			}
-
-		} finally {
-			IOUtils.closeQuietly(randAcessFile);
-		}
-	}
 
 }

@@ -1,21 +1,21 @@
 
 
 
-logOutputIntervalSeconds: 1
+logOutputIntervalSeconds: 10
 startupDelay: 3000
 
 read:
   threads: 1
   filename: testreadfile
   filesize: 10485760
-  chunkSize: 8192
+  chunkSize: 2097152
   durationSeconds: 60
   
 write:
   threads: 1
   filename: testwritefile
   filesize: 10485760
-  chunkSize: 8192
+  chunkSize: 2097152
   durationSeconds: 60
   
   
